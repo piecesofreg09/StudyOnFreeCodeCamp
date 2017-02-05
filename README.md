@@ -1,3 +1,2 @@
 # StudyOnFreeCodeCamp
-Code written when studying on freecodecamp
-In Javascript
+Code written when studying on freecodecamp in Javascript
