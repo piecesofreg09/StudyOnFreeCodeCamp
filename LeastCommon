@@ -1,0 +1,102 @@
+
+function smallestCommons(arr) {
+  
+  arr = (arr[0] < arr[1])? [arr[0], arr[1]] : [arr[1], arr[0]] ;
+  console.log(arr);
+  console.log((arr[1] - arr[0] + 1));
+  
+  function dc(num) {
+    var dca = [1];
+    var id = 0;
+    var temp = 1;
+    for ( var j = 0; j < dca.length; j ++ ) {
+      temp *= dca[j];
+    }
+    //console.log("temp: " + temp);
+    var cnum = num;
+    while ( temp != num ) {
+      temp = 1;
+      for ( var i = 2; i < cnum + 1; i ++ ){
+        if ((cnum % i) === 0) {
+          cnum = cnum / i;
+          dca[id] = i;
+          id ++;
+          //console.log("dca after first run: " + dca);
+          //console.log("cnum after first run: " + cnum);
+          //console.log("num after first run: " + num);
+          break;
+        }
+      }
+      for ( j = 0; j < dca.length; j ++ ) {
+        temp *= dca[j];
+      }
+      //console.log("temp after first run: " + temp);
+    }
+    
+    
+    return dca;
+  }
+  
+  console.log("dc(1): " + dc(1));
+  
+  var dcaArr = [];
+  var dic = [];
+  for (j = arr[0]; j <=  arr[1]; j ++ ) {
+    //console.log("first of array: "+ (j));
+    dcaArr[j - arr[0]] = dc(j);
+    //console.log(dc(j));
+    temp = dcaArr[j - arr[0]];
+    console.log(temp);
+    dic[j - arr[0]] = {};
+    for (i = 0; i < temp.length; i ++) {
+      if (dic[j - arr[0]].hasOwnProperty(temp[i])) {
+        dic[j - arr[0]][temp[i]] += 1;
+      }
+      else {
+        dic[j - arr[0]][temp[i]] = 1;
+      }
+    }
+    //console.log("dic j: " + Object.keys(dic[j - arr[0]]));
+    //console.log("dic j: " + Object.values(dic[j - arr[0]]));
+  }
+  console.log(dic);
+  
+  var finalDic = {};
+  console.log("mark final:");
+  console.log(dic.length);
+  for (j = 0; j < dic.length; j ++) {
+    var tempt = Object.keys(dic[j]);
+    console.log("dic "+ j +" key: " + tempt + " value: " + dic[j][tempt]);
+    for ( k = 0; k < tempt.length; k ++) {
+      if (finalDic.hasOwnProperty(tempt[k])) {
+        console.log("Run here: update.");
+        if (finalDic[tempt[k]] < dic[j][tempt[k]]) {
+          finalDic[tempt[k]] = dic[j][tempt[k]];
+        }
+      }
+      else {
+        console.log("Run here: new.");
+        finalDic[tempt[k]] = dic[j][tempt[k]];
+      }
+      console.log(finalDic);
+    }
+    
+  }
+  
+  var res = 1;
+  var finalKeys = Object.keys(finalDic);
+  var finalValues = Object.values(finalDic);
+  console.log("finalKeys: " + finalKeys);
+  console.log("finalValues: " + finalValues);
+  for (j = 0; j < finalKeys.length; j ++) {
+    res = res * Math.pow(finalKeys[j], finalValues[j]);
+    console.log(Math.pow(Number((finalKeys[j])), Number(finalValues[j])));
+  }
+  console.log(res);
+  
+  
+  return res;
+}
+
+
+smallestCommons([1,5]);
