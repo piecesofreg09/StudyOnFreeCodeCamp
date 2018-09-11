@@ -1,0 +1,29 @@
+#main-area {
+  background-color: #E0E0E0;
+  border-radius: 10px;
+  padding: 50px;
+  margin-top: 50px;
+}
+#pic-frame {
+  background-color: #FFFFFF;
+  padding: 4px;
+  border-radius: 4px;
+}
+#picture-label {
+  font-size: 18px;
+  padding: 5px;
+}
+#list-head {
+  font-size: 21px;
+  padding-top: 20px;
+}
+.emch {
+  font-weight: bold;
+}
+#quote {
+  padding: 20px 60px 20px 60px;
+}
+#link-sent {
+  font-size: 25px;
+  padding: 20px 60px 20px 60px;
+}
