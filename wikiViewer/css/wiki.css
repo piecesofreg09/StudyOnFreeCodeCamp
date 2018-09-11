@@ -1,0 +1,44 @@
+body {
+  background-color: #333;
+}
+* {
+  font-family: Arial;
+}
+#input-field {
+  padding: 50px 50px 10px 50px;
+}
+#input-field p {
+  color: white;
+  margin: 0px;
+  font-size: 20px;
+}
+#input-field #random-button {
+  margin: 20px;
+  padding: 10px;
+  font-size: 30px;
+  background-color: #777;
+  border: 0;
+  border-radius: 10px;
+}
+input {
+  font-size: 30px;
+  line-height: 1.8em;
+  margin: 20px;
+  border-radius: 15px;
+  border: 1px solid;
+}
+input:focus {
+  outline: none;
+}
+.singRes {
+  background-color: #777;
+  margin: 20px;
+  padding: 15px;
+}
+.singRes:hover {
+  background-color: #555;
+}
+a:link, a:visited, a:active, a:hover {
+  color: white;
+  text-decoration: none;
+}
