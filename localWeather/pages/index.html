@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://use.fontawesome.com/37d451ea67.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2ZSdd_NN4RS0nscix_hdhaR7UW8Qbec8&callback=initMap">
+    </script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
+    
+    <script type="text/javascript" src="../js/locwea.js"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css" rel="stylesheet" type="text/css"></link>
+    
+    <link href="../css/locwea.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+    <div class = "container-fluid" id = "main-div">
+      <!-- Here starts the local weather text -->
+      <div class = "row">
+        <div class="col-sm-12">
+          <p class="text-center" id = "local-weather-text">L<i class="wi wi-day-sunny"></i>CAL WEATHER</p>
+        </div>
+      </div>
+      <!-- Here starts the location text -->
+      <div class = "row">
+        <div class="col-sm-12">
+          <p class="text-center" id = "location" class="location"></p>
+        </div>
+      </div>
+      <!-- Here starts the weather icon -->
+      <div class = "row">
+        <div class="col-sm-12">
+          <p class="text-center" id = "weather-icon-div"><i class="wi wi-" id="weather-icon"></i></p>
+        </div>
+      </div>
+      <!-- Here starts the weather and temperature text -->
+      <div class = "row">
+        <div class="col-sm-12">
+          <p class="text-center" id = "weather">WeatherData</p>
+        </div>
+      </div>
+      <!-- Here starts the temperature change button -->
+      <div class = "row">
+        <div class="col-sm-12 buttonParentDiv" style="text-align:center">
+          <button input="button" class="btn btn-primary buttonDiv" id="changeT">
+            <p class="text-center buttonText">C&deg; / F&deg;</p>
+          </button>
+        </div>
+      </div>
+      <!-- Here starts the reload weather button -->
+      <div class = "row">
+        <div class="col-sm-12 buttonParentDiv" style="text-align:center">
+          <button input="button" class="btn btn-primary buttonDiv" id="loadWeather">
+            <p class="text-center buttonText">Reload Weather</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

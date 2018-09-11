@@ -1,0 +1,53 @@
+:root {
+  --main-bg-c: #FFEF24;
+  --top-panel-c: #FFF9B2;
+  --online-c: #CFF2A9;
+  --offline-c: #8FC2CB;
+}
+body {
+  background-color: var(--main-bg-c);
+}
+#main-container {
+  background-color: var(--top-panel-c);
+}
+@media screen and (min-width: 480px) {
+    #main-container {
+      margin: 0 75px 0 75px;
+  }
+}
+@media screen and (min-width: 1080px) {
+    #main-container {
+      width: 750px;
+      margin: auto;
+  }
+}
+#all, #on, #off {
+  font-size: 20px;
+  border-radius: 5px;
+}
+#all {
+  background-color: var(--main-bg-c);
+}
+#on {
+  background-color: var(--online-c);
+}
+#off {
+  background-color: var(--offline-c);
+}
+.channel, #title {
+  margin: 5px;
+}
+.channel {
+  font-size: 15px;
+}
+#title {
+  padding: 30px;
+  font-size: 45px;
+  font-family: Arial Black;
+}
+.Offline {
+  background-color: var(--offline-c);
+}
+.Online {
+  background-color: var(--online-c);
+}

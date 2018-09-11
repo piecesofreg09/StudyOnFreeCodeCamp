@@ -1,0 +1,33 @@
+body {
+  background-color: #555;
+}
+#local-weather-text, #weather-icon-div {
+  font-family: Arial;
+  font-size: 60px;
+  color: white;
+  padding: 30px;
+}
+#location {
+  font-family: Arial;
+  font-size: 30px;
+  color: white;
+  padding: 10px, 30px;
+}
+#weather {
+  font-family: Arial;
+  font-size: 30px;
+  color: white;
+  padding: 5px, 30px;
+}
+.buttonParentDiv {
+  padding: 20px;
+}
+.buttonDiv {
+  padding: 10;
+  background-color: #333;
+  border: 0;
+}
+.buttonText {
+  margin: 0;
+  font-size: 20px;
+}

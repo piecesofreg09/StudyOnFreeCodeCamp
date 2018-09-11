@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://use.fontawesome.com/37d451ea67.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../js/quote.js"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+    
+    <link href="../css/quote.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" id = "main-div">
+        <div class="col-sm-12">
+          <!-- Here starts the quote area -->
+          <div class="row">
+            <div class="col-xs-12"><p id="quote-content">"</p></div>
+          </div>
+          <!-- Here ends the quote area -->
+          <!-- Here starts the quote author area-->
+          <div class="row">
+            <div class="col-xs-12"><p id="quote-title">   </p></div>
+          </div>
+          <!-- Here ends the quote author area-->
+          <!-- Here starts the button area -->
+          <div class="row">
+            <div class = "col-sm-4" style="text-align: center; padding: 4px;">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-text="something" target="_blank">
+                <button type="button" id = "twitter-button" class="btn .btn-primary buttonDiv">
+                  <p class="text-center buttonTwi"><i class="fa fa-twitter" aria-hidden="true"></i></p>
+                </button>
+              </a>
+            </div>
+            <div class = "col-sm-8" style="text-align: center; padding: 4px;">
+              <button type="button" id="get-another-quote-button" class="btn .btn-primary buttonDiv"><p class="text-center buttonTwi">NEW QUOTE</p></button>
+            </div>
+          </div>
+          <!-- Here endss the button area -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <p class="text-center" id="author-text">Made by Winston</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
