@@ -1,0 +1,41 @@
+body {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: #222222;
+}
+
+#quote-box {
+  text-align: center;
+  background-color: #CCCCCC;
+  
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #CCCCCC;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  padding: 15px;
+}
+
+* {
+  font-family: Courier;
+}
+
+.btn {
+  border: none;
+  margin: 0.25em;
+}
+
+i {
+  color: black;
+  font-size: 1.5em;
+}
+
+#text {
+  font-size: 1.2em;
+  font-weight: bold;
+}
