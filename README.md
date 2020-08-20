@@ -14,6 +14,15 @@ Simple use of google maps api to query the details of the current location, and 
 Get a random quote from [quote on design](https://quotesondesign.com), and provided with a twitter post button.
 
 * tribute
+
 * wikiViewer
+
+* Drum based on React
+[Project link](https://github.com/piecesofreg09/study_on_free_code_camp/tree/master/drum_reactredux)
+[Demonstration on Codepen](https://codepen.io/piecesofreg09/full/rNVLvvz)
+
+* Calculator based on React
+
+
 ## algorithms
 * least common
