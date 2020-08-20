@@ -1,0 +1,134 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #888888;
+  font-family: Arial;
+}
+
+#drum-machine {
+  background-color: #DDDDDD;
+  text-align: center;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #CCCCCC;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 25px;
+}
+
+#pad-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+#pad-outer-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+#control-container {
+  display: grid;
+  grid-template-columns: auto;
+  padding: 15px;
+}
+
+.control-child-container {
+  padding: 15px;
+  height: 50px;
+  width: 120px;
+  position: relative;
+}
+
+.control-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.control-button {
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+  font-family: Arial;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 10px 20px;
+  background-color: #EEEEEE;
+  outline: none;
+  user-select: none;
+}
+.control-button:hover {
+  background-color: #DDDDDD;
+}
+.control-button:active {
+  background-color: #CCCCCC;
+}
+
+.control-button-text {
+  top: 50%;
+  left: 100%;
+  transform: translate(0%, -25%);
+}
+
+.slider {
+  -webkit-appearance: none;
+  /* Override default CSS styles */
+  appearance: none;
+  width: 100%;
+  /* Full-width */
+  height: 25px;
+  /* Specified height */
+  background: #d3d3d3;
+  /* Grey background */
+  outline: none;
+  /* Remove outline */
+  opacity: 0.7;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+.slider:hover {
+  opacity: 1;
+  /* Fully shown on mouse-over */
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Override default look */
+  appearance: none;
+  width: 15px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #6BDDFF;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
+}
+
+.drum-pad {
+  user-select: none;
+  padding: 15px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #CCCCCC;
+  font-size: 35px;
+  height: 40px;
+  width: 50px;
+  text-align: center;
+}
+.drum-pad:hover {
+  background-color: #AAAAAA;
+}
+.drum-pad.disabled {
+  background-color: #111111;
+}
+
+#slidevolumecontainer {
+  height: 0.5em;
+}

@@ -1,0 +1,386 @@
+
+var timeVar;
+
+
+// utility functions
+const MINUTECONSTANT = 60;
+miliToMinute = (mili) => {
+  var secs = Math.floor(mili / 1000);
+  //console.log(secs);
+  var newMinute = Math.floor(secs / MINUTECONSTANT);
+  var newSec = secs % MINUTECONSTANT;
+  return {min: ("0" + newMinute).slice(-2),
+          sec: ("0" + newSec).slice(-2)};
+};
+
+// play sound 
+playSound = () => {
+  const audio = document.getElementById('beep');
+  audio.currentTime = 0;
+  audio.volume = 1;
+  audio.play();
+}
+
+endSound = () => {
+  const audio = document.getElementById('beep');
+  audio.pause();
+  audio.currentTime = 0;
+  audio.volume = 1;
+}
+
+
+//console.log(miliToMinute(100000));
+
+// sound related
+const soundPath = 'https://raw.githubusercontent.com/piecesofreg09/study_on_free_code_camp/master/reactDrum/100.mp3';
+
+
+const CHANGETIME = 'CHANGETIME';
+const START = 'START';
+const PAUSE = 'PAUSE';
+const END = 'END';
+const UPDATETIMER = 'UPDATETIMER';
+const timeLimit = {break: {up: 60, down: 1}, session: {up: 60, down: 1}};
+const initialSessionLength = 25;
+const initialBreakLength = 5;
+// totalTime is the length of total time in miliseconds
+// fullTime is the counting for current start
+// time left is used for counting
+// inSession indicates whether it's in session or break
+// clockGoing indicates if the clock is currently running
+// working: change between reset and working
+const initialState = {break: initialBreakLength, session: initialSessionLength, inSession: true, clockGoing: false, working: false, totalTime: initialSessionLength * MINUTECONSTANT * 1000,fullTime: initialSessionLength * MINUTECONSTANT * 1000, timeLeftInMiliSecs: initialSessionLength * MINUTECONSTANT * 1000, refTime: null};
+
+// actions
+const changeTime = (inc, tuner) => {
+  return {
+    type: CHANGETIME,
+    tuner: tuner,
+    inc: inc
+  }
+};
+
+const startTimer = (ref, tuner) => {
+  //console.log(ref);
+  //console.log(tuner);
+  return {
+    type: START,
+    ref: ref,
+    tuner: tuner
+  }
+};
+
+const pauseTimer = (ref, tuner) => {
+  return {
+    type: PAUSE,
+    ref: ref,
+    tuner: tuner
+  }
+};
+
+const endTimer = (tuner) => {
+  return {
+    type: END,
+    tuner: tuner
+  }
+};
+
+const updateTimer = (tuner) => {
+  return {
+    type: UPDATETIMER,
+    tuner: tuner
+  }
+};
+
+const controlReducer = (state = initialState, action) => {
+  let newState = Object.assign({}, state);
+  switch (action.type) {
+    case CHANGETIME:
+      var temp = {};
+      if (action.inc ==  true) {
+        temp[action.tuner] = timeLimit[action.tuner].up > (state[action.tuner] + 1) ? (state[action.tuner] + 1) : timeLimit[action.tuner].up;
+        newState = Object.assign({}, newState, temp);
+      }
+      else {
+        temp[action.tuner] = timeLimit[action.tuner].down < (state[action.tuner] - 1) ? (state[action.tuner] - 1) : timeLimit[action.tuner].down;
+        newState = Object.assign({}, newState, temp);
+      }
+      
+      var temp2 = {};
+      if ((state.working == false) && (action.tuner == 'session')) {
+        temp2['timeLeftInMiliSecs'] = temp[action.tuner] * MINUTECONSTANT * 1000;
+        temp2['totalTime'] = temp[action.tuner] * MINUTECONSTANT * 1000;
+        temp2['fullTime'] = temp[action.tuner] * MINUTECONSTANT * 1000;
+        newState = Object.assign({}, newState, temp2);
+      }
+      
+      return newState;
+    
+      
+    case START:
+      //console.log('in start');
+      //console.log(action.ref);
+      
+      var temp = {refTime: action.ref, clockGoing: true};
+      if (state.working == false) {
+        temp['timeLeftInMiliSecs'] = state[action.tuner] * MINUTECONSTANT * 1000;
+        temp['totalTime'] = state[action.tuner] * MINUTECONSTANT * 1000;
+        temp['fullTime'] = state[action.tuner] * MINUTECONSTANT * 1000;
+        temp['working'] = true;
+      }
+      //console.log(temp);
+      newState = Object.assign({}, newState, temp);
+      //console.log(newState);
+      
+      return newState;
+      
+      
+    case PAUSE:
+      //console.log('in pause');
+      //console.log(action.ref);
+      var temp = {refTime: action.ref, clockGoing: false, fullTime: state.timeLeftInMiliSecs};
+      newState = Object.assign({}, newState, temp);
+      return newState;
+      
+      
+    case END:
+      //console.log('in end');
+      endSound();
+      var temp = {inSession: true, clockGoing: false,
+                  working: false,
+                  totalTime: newState.session * MINUTECONSTANT * 1000,
+                  fullTime: newState.session * MINUTECONSTANT * 1000,
+                  timeLeftInMiliSecs: newState.session * MINUTECONSTANT * 1000, refTime: null};
+      newState = Object.assign({}, newState, temp);
+      return initialState;
+      
+      
+    case UPDATETIMER:
+      //console.log('in update');
+      
+      var temp = {timeLeftInMiliSecs: newState.fullTime - ((new Date()).getTime() - newState.refTime)};
+      
+      if (temp.timeLeftInMiliSecs <= 0) {
+        playSound();
+        if (state.inSession == true) {
+          temp['inSession'] = false;
+          temp['totalTime'] = newState.break * MINUTECONSTANT * 1000;
+          temp['fullTime'] = newState.break * MINUTECONSTANT * 1000;
+          temp['timeLeftInMiliSecs'] = newState.break * MINUTECONSTANT * 1000;
+          temp['refTime'] = new Date();
+        }
+        else if (state.inSession == false) {
+          temp['inSession'] = true;
+          temp['totalTime'] = newState.session * MINUTECONSTANT * 1000;
+          temp['fullTime'] = newState.session * MINUTECONSTANT * 1000;
+          temp['timeLeftInMiliSecs'] = newState.session * MINUTECONSTANT * 1000;
+          temp['refTime'] = new Date();
+        }
+      }
+      
+      newState = Object.assign({}, newState, temp);
+      
+      return newState;
+    default:
+      return initialState;
+  }
+}
+
+const store = Redux.createStore(controlReducer);
+
+// React:
+const Provider = ReactRedux.Provider;
+const connect = ReactRedux.connect;
+
+// Maps
+const mapStateToProps = (state, ownState) => {
+  return {state: Object.assign({}, state)};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeTime: (inc, tuner) => {
+      dispatch(changeTime(inc, tuner));
+    },
+    startTimer: (ref, inSession) => {
+      dispatch(startTimer(ref, inSession));
+    },
+    pauseTimer: (ref, inSession) => {
+      dispatch(pauseTimer(ref, inSession));
+    },
+    endTimer: (...args) => {
+      dispatch(endTimer(args));
+    },
+    updateTimer: (...args) => {
+      dispatch(updateTimer(args));
+    }
+    
+  }
+}
+
+
+
+// React
+// Tuner
+class Tuner extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  lengthUp = () => {
+    this.props.changeTime(true, this.props.name);
+  }
+  
+  lengthDown = () => {
+    this.props.changeTime(false, this.props.name);
+  }
+  
+  render() {
+    //console.log(this.props.state);
+    return (
+      <div>
+        <p  id={this.props.name + '-label'}>{this.props.name} Length</p>
+        <div id='tuner-inner-container'>
+          <div class='tuner-pads'></div>
+          <div class='tuner-pads' id={this.props.name + '-increment'} onClick={this.lengthUp}><i class="fas fa-arrow-up"></i></div>
+          <div class='tuner-pads' id={this.props.name + '-length'}>{this.props.state[this.props.name]}</div>
+          <div class='tuner-pads' id={this.props.name + '-decrement'} onClick={this.lengthDown}><i class="fas fa-arrow-down"></i></div>
+          <div class='tuner-pads'></div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const ContainerTuner = connect(mapStateToProps, mapDispatchToProps)(Tuner);
+
+
+
+// Controller
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  start = () => {
+    this.props.startTimer((new Date()).getTime(), this.props.state.inSession ? 'session' : 'break');
+    //console.log(this.props.state);
+    
+    timeVar = setInterval(this.updateTimer.bind(this), 100);
+  }
+  
+  updateTimer = () => {
+    //console.log(this.props.state);
+    this.props.updateTimer(this.props.state.inSession ? 'session' : 'break');
+  }
+  
+  pause = () => {
+    this.props.pauseTimer((new Date()).getTime(), this.props.state.inSession ? 'session' : 'break');
+    //console.log(this.props.state);
+    clearInterval(timeVar);
+    timeVar = null;
+  }
+  
+  end = () => {
+    if (timeVar) {
+      clearInterval(timeVar);
+      timeVar = null;
+    }
+    this.props.endTimer(this.props.state.inSession ? 'session' : 'break');
+  }
+  
+  render() {
+    return (
+      <div>
+        <div id='controller-containter'>
+          <div></div>
+          <div></div>
+          <div id="start_stop" onClick={this.props.state.clockGoing ? this.pause : this.start}>
+          <i class="fas fa-play"></i>
+          <i class="fas fa-pause"></i>
+          </div>
+          <div></div>
+          <div></div>
+          <div id="reset"  onClick={this.end}>
+          <i class="fas fa-stop"></i>
+          </div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const ContainerController = connect(mapStateToProps, mapDispatchToProps)(Controller);
+
+
+
+// Clock
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    var time = miliToMinute(this.props.state.timeLeftInMiliSecs);
+    return (
+      <div id='clock'>
+        <div id='timer-label'>{this.props.state.inSession ? 'In Session' : 'In Break'}</div>
+        <div id="time-left">{time.min}:{time.sec}</div>
+      </div>
+    );
+  }
+}
+
+const ContainerClock = connect(mapStateToProps, mapDispatchToProps)(Clock);
+
+class Outer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    var barStyle = {width: ((this.props.state.totalTime - this.props.state.timeLeftInMiliSecs) / this.props.state.totalTime).toFixed(4) * 100 + '%'};
+    //console.log(barStyle);
+    return (
+      <div>
+        <div id='test1'>
+          <div id='break-session-container'>
+            <div><ContainerTuner name='break'/></div>
+            <div><ContainerTuner name='session'/></div>
+          </div>
+          <div id='control-container'>
+            <ContainerController />
+          </div>
+          <div id='clock-container'>
+            <ContainerClock />
+            <audio src={soundPath}  id='beep' class='clip'/>
+          </div>
+          <div id="progress-outer">
+            <div id="bar" style={barStyle}></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+const ContainerOuter = connect(mapStateToProps, mapDispatchToProps)(Outer);
+
+class AppWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    return (
+      <Provider store={store}>
+        <div id='title'>Pomodoro Clock</div>
+        <ContainerOuter />
+      </Provider>
+    );
+  }
+}
+
+ReactDOM.render((<AppWrapper />), document.getElementById('test'));

@@ -1,0 +1,123 @@
+$display-font-size: 15px;
+$pad-font-size: 30px;
+
+@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap');
+
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #888888;
+  font-family: Arial;
+}
+
+#test {
+  background-color: #DDDDDD;
+  text-align: center;
+  
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #CCCCCC;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  padding: 0px;
+}
+
+#attr {
+  text-align: center;
+  padding: 0px;
+}
+
+
+#display-container {
+  display: grid;
+  grid-template-columns: auto;
+  margin: 0px 0px 10px 0px;
+  text-align: right;
+  
+  font-size: $display-font-size;
+  font-family: 'Black Ops One';
+  
+  #formula-container, #input-container {
+    text-align: right;
+    border-style: solid;
+    bolder-color: black;
+    border-width: 0px;
+    padding: 2px;
+    height: 20px;
+  }
+}
+
+#digits-equal-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0px;
+}
+
+#digits-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 0px;
+}
+
+#equals-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 0px;
+}
+
+.digit-pad {
+  user-select: none;
+  
+  background-color: #AAAAAA;
+  border: solid 0px;
+  border-radius: 0px;
+  padding: 10px;
+  margin: 1px;
+  width: 30px;
+  height: 40px;
+  
+  position: relative;
+  
+  &:hover {
+    background-color: #666666;
+  }
+}
+
+.inside-digit-pad {
+  user-select: none;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  
+  font-size: $pad-font-size;
+  font-family: 'Black Ops One';
+  
+}
+
+#clear {
+  background-color: #d46363;
+  &:hover {
+    background-color: #a80000;
+  }
+}
+
+#clr {
+  background-color: #80adad;
+  &:hover {
+    background-color: #008787;
+  }
+}
+
+#equals {
+  background-color: #76ba72;
+  &:hover {
+    background-color: #077800;
+  }
+}
