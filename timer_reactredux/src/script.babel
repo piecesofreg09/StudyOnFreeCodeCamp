@@ -49,7 +49,10 @@ const initialBreakLength = 5;
 // inSession indicates whether it's in session or break
 // clockGoing indicates if the clock is currently running
 // working: change between reset and working
-const initialState = {break: initialBreakLength, session: initialSessionLength, inSession: true, clockGoing: false, working: false, totalTime: initialSessionLength * MINUTECONSTANT * 1000,fullTime: initialSessionLength * MINUTECONSTANT * 1000, timeLeftInMiliSecs: initialSessionLength * MINUTECONSTANT * 1000, refTime: null};
+const initialState = {break: initialBreakLength, session: initialSessionLength, 
+  inSession: true, clockGoing: false, working: false, totalTime: initialSessionLength * MINUTECONSTANT * 1000,
+  fullTime: initialSessionLength * MINUTECONSTANT * 1000, 
+  timeLeftInMiliSecs: initialSessionLength * MINUTECONSTANT * 1000, refTime: null};
 
 // actions
 const changeTime = (inc, tuner) => {
